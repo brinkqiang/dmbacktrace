@@ -38,10 +38,10 @@ public:
 };
 
 
-std::string prettyBackTrace(int skipframes);
+std::string prettyBackTrace(int skipframes = 0);
 #else
 
-std::string prettyBackTrace(int skipframes);
+std::string prettyBackTrace(int skipframes = 0);
 #endif
 
 #endif // __DMBACKTRACE_H_INCLUDE__

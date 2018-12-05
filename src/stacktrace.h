@@ -14,6 +14,7 @@ void stacktrace_free(struct stacktrace *st);
 
 void stacktrace_print(struct stacktrace *st);
 void stacktrace_fprint(struct stacktrace *st, FILE *);
+void stacktrace_string(struct stacktrace *st, std::string* trace);
 
 struct stacktrace *stacktrace_get_exc();
 
