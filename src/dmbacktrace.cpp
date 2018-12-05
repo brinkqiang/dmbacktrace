@@ -82,6 +82,8 @@ void StackWalkerStringHelper::OnDbgHelpErr(LPCSTR szFuncName, DWORD gle, DWORD64
         StackWalker::OnDbgHelpErr(szFuncName, gle, addr);
 }
 #else
+#include <string>
+#include "stacktrace.h"
 std::string prettyBackTrace(int skipframes)
 {
     std::string strTrace;

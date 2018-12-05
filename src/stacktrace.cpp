@@ -5,11 +5,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <unwind.h>
-
-#include <stacktrace.h>
 #include <pthread.h>
 
 #include <string>
+
+#include "stacktrace.h"
 #include "dmformat.h"
 
 struct stacktrace_frame {
