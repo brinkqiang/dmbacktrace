@@ -81,5 +81,11 @@ void StackWalkerStringHelper::OnDbgHelpErr(LPCSTR szFuncName, DWORD gle, DWORD64
     else
         StackWalker::OnDbgHelpErr(szFuncName, gle, addr);
 }
-
+#else
+std::string prettyBackTrace(int skipframes)
+{
+    struct stacktrace *trace = stacktrace_get(0);
+    stacktrace_print(trace);
+    stacktrace_free(trace);
+}
 #endif

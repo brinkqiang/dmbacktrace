@@ -39,7 +39,9 @@ public:
 
 
 std::string prettyBackTrace(int skipframes);
+#else
 
+std::string prettyBackTrace(int skipframes);
 #endif
 
 #endif // __DMBACKTRACE_H_INCLUDE__
