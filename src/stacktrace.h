@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <typeinfo>
 struct stacktrace;
 
 struct stacktrace *stacktrace_get(unsigned skip);
