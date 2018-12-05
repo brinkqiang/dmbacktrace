@@ -9,6 +9,8 @@
 #include <stacktrace.h>
 #include <pthread.h>
 
+#include "dmformat.h"
+
 struct stacktrace_frame {
     void *addr;
     char *file;
@@ -284,7 +286,6 @@ void stacktrace_fprint(struct stacktrace *trace, FILE *f) {
     }
 }
 
-
 static pthread_once_t _stacktrace_once = PTHREAD_ONCE_INIT;
 static pthread_key_t _stacktrace_key;
 
@@ -323,6 +324,26 @@ void _stacktrace_set_exc() {
 
 struct stacktrace *_stacktrace_get_exc() {
     return _stacktrace_get_tls()->trace;
+}
+
+struct stacktrace * stacktrace_get_exc()
+{
+    return _stacktrace_get_exc();
+}
+
+void stacktrace_string(struct stacktrace *trace, std::string* str)
+{
+    int i;
+
+    stacktrace_resolve(trace);
+
+    for (i = 0; i < trace->frames_len; i++) {
+        struct stacktrace_frame *frame = &trace->frames[i];
+        std::string strLine;
+        fmt::format(strLine, "#%d %p - %s in %s:%d\n", i, frame->addr,
+            frame->func ? frame->func : "??", frame->file ? frame->file : "??", frame->line);
+        str->append(strLine);
+    }
 }
 
 #endif
