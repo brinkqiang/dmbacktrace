@@ -88,7 +88,7 @@ std::string prettyBackTrace(int skipframes)
 {
     std::string strTrace;
     struct stacktrace *trace = stacktrace_get(skipframes);
-    stacktrace_string(trace, strTrace);
+    stacktrace_string(trace, &strTrace);
     stacktrace_free(trace);
 
     return strTrace;
