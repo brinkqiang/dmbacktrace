@@ -5,6 +5,7 @@
 #ifndef WIN32
 
 #include <stdio.h>
+#include <string>
 
 struct stacktrace;
 
