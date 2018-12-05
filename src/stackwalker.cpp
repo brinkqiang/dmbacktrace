@@ -1,6 +1,6 @@
 /**********************************************************************
  *
- * StackWalker.cpp
+ * stackwalker.cpp
  * https://github.com/JochenKalmbach/StackWalker
  *
  * Old location: http://stackwalker.codeplex.com/
