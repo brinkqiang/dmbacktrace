@@ -9,7 +9,7 @@
 #include <stacktrace.h>
 #include <pthread.h>
 
-#include "dmformat.h"
+//#include "dmformat.h"
 
 struct stacktrace_frame {
     void *addr;
@@ -340,8 +340,8 @@ void stacktrace_string(struct stacktrace *trace, std::string* str)
     for (i = 0; i < trace->frames_len; i++) {
         struct stacktrace_frame *frame = &trace->frames[i];
         std::string strLine;
-        fmt::format(strLine, "#%d %p - %s in %s:%d\n", i, frame->addr,
-            frame->func ? frame->func : "??", frame->file ? frame->file : "??", frame->line);
+        //fmt::format(strLine, "#%d %p - %s in %s:%d\n", i, frame->addr,
+        //    frame->func ? frame->func : "??", frame->file ? frame->file : "??", frame->line);
         str->append(strLine);
     }
 }
