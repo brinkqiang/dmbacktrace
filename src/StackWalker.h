@@ -170,7 +170,7 @@ protected:
   virtual void OnCallstackEntry(CallstackEntryType eType, CallstackEntry& entry);
   virtual void OnDbgHelpErr(LPCSTR szFuncName, DWORD gle, DWORD64 addr);
   virtual void OnOutput(LPCSTR szText);
-
+  virtual void OnCallStackOutput(LPCSTR szText) { OnOutput(szText); }
   StackWalkerInternal* m_sw;
   HANDLE               m_hProcess;
   DWORD                m_dwProcessId;

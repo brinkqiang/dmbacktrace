@@ -1401,7 +1401,7 @@ void StackWalker::OnCallstackEntry(CallstackEntryType eType, CallstackEntry& ent
       _snprintf_s(buffer, maxLen, "%s (%d): %s\n", entry.lineFileName, entry.lineNumber,
                   entry.name);
     buffer[STACKWALK_MAX_NAMELEN - 1] = 0;
-    OnOutput(buffer);
+    OnCallStackOutput(buffer);
   }
 }
 
