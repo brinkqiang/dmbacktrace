@@ -2,7 +2,7 @@
 #ifndef __DMBACKTRACE_H_INCLUDE__
 #define __DMBACKTRACE_H_INCLUDE__
 
-#if defined(_WIN32)
+#ifdef WIN32
 
 #include "StackWalker.h"
 #include "TlHelp32.h"
