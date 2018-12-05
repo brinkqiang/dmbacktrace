@@ -1,4 +1,6 @@
 
+#ifdef WIN32
+
 #include "stackwalker.h"
 
 #include <stdio.h>
@@ -1384,3 +1386,5 @@ void StackWalker::OnOutput(LPCSTR buffer)
 {
   OutputDebugStringA(buffer);
 }
+
+#endif
