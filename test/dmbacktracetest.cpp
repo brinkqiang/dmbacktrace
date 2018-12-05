@@ -1,6 +1,7 @@
 
 #include "dmbacktrace.h"
-
+#include <iostream>
+#include <string>
 void test2()
 {
     std::string strTrace = prettyBackTrace(0);
