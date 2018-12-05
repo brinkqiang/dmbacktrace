@@ -1,3 +1,6 @@
+
+#ifndef WIN32
+
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -321,3 +324,5 @@ void _stacktrace_set_exc() {
 struct stacktrace *_stacktrace_get_exc() {
     return _stacktrace_get_tls()->trace;
 }
+
+#endif

@@ -1,3 +1,6 @@
+
+#ifndef WIN32
+
 #include <stacktrace.h>
 
 extern "C" void _stacktrace_set_exc();
@@ -14,3 +17,5 @@ extern "C" void __wrap___cxa_throw(void *thrown_exception, std::type_info *tinfo
     _stacktrace_set_exc();
     __cxa_throw(thrown_exception, tinfo, dest);
 }
+
+#endif
