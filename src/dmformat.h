@@ -28,7 +28,6 @@
 #ifndef __DMFORMAT_H_INCLUDE__
 #define __DMFORMAT_H_INCLUDE__
 
-#define FMT_HEADER_ONLY
 #include <algorithm>
 #include <cassert>
 #include <cmath>
