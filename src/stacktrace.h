@@ -1,11 +1,11 @@
-
-#ifndef __STACKTRACE_H_INCLUDE__
-#define __STACKTRACE_H_INCLUDE__
-
-#ifndef WIN32
+#ifndef STACKTRACE_H_INCLUDED_
+#define STACKTRACE_H_INCLUDED_
 
 #include <stdio.h>
-#include <string>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 struct stacktrace;
 
@@ -15,23 +15,13 @@ void stacktrace_free(struct stacktrace *st);
 
 void stacktrace_print(struct stacktrace *st);
 void stacktrace_fprint(struct stacktrace *st, FILE *);
-void stacktrace_string(struct stacktrace *st, std::string* trace);
 
-void _stacktrace_set_exc();
-struct stacktrace *_stacktrace_get_exc();
-
-struct stacktrace *stacktrace_get_exc() {
-    return _stacktrace_get_exc();
-}
-
-extern "C" void __cxa_throw(void *thrown_exception, std::type_info *tinfo, void(*dest)(void *))
-__attribute__((noreturn));
-
-extern "C" void __wrap___cxa_throw(void *thrown_exception, std::type_info *tinfo, void(*dest)(void *)) {
-    _stacktrace_set_exc();
-    __cxa_throw(thrown_exception, tinfo, dest);
-}
-
+#ifdef __cplusplus
+struct stacktrace *stacktrace_get_exc();
 #endif
 
-#endif // __STACKTRACE_H_INCLUDE__
+#ifdef __cplusplus
+}
+#endif
+
+#endif

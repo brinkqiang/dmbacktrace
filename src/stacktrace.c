@@ -1,16 +1,10 @@
-
-#ifndef WIN32
-
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <unwind.h>
+
+#include <stacktrace.h>
 #include <pthread.h>
-
-#include <string>
-
-#include "stacktrace.h"
-#include "dmformat.h"
 
 struct stacktrace_frame {
     void *addr;
@@ -287,20 +281,7 @@ void stacktrace_fprint(struct stacktrace *trace, FILE *f) {
     }
 }
 
-void stacktrace_string(struct stacktrace *st, std::string* trace);
-{
-    int i;
 
-    stacktrace_resolve(st);
-
-    for (i = 0; i < trace->frames_len; i++) {
-        struct stacktrace_frame *frame = &trace->frames[i];
-        std::string strLine;
-        fmt::format(strLine, "#{0} {1} - {2} in {3}:{4}\n", i, frame->addr,
-            frame->func ? frame->func : "??", frame->file ? frame->file : "??", frame->line);
-        trace->append(strLine);
-    }
-}
 static pthread_once_t _stacktrace_once = PTHREAD_ONCE_INIT;
 static pthread_key_t _stacktrace_key;
 
@@ -340,5 +321,3 @@ void _stacktrace_set_exc() {
 struct stacktrace *_stacktrace_get_exc() {
     return _stacktrace_get_tls()->trace;
 }
-
-#endif
