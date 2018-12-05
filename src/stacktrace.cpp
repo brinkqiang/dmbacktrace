@@ -291,7 +291,7 @@ void stacktrace_string(struct stacktrace *st, std::string* trace);
 {
     int i;
 
-    stacktrace_resolve(trace);
+    stacktrace_resolve(st);
 
     for (i = 0; i < trace->frames_len; i++) {
         struct stacktrace_frame *frame = &trace->frames[i];
