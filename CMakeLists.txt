@@ -27,13 +27,15 @@ ELSEIF (APPLE)
 
     SET(DMOS_NAME "mac") 
 
-    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -fpermissive --wrap=__cxa_throw" )
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -fpermissive" )
+    SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --wrap=__cxa_throw" )
 ELSEIF (UNIX)
     MESSAGE(STATUS "Now is UNIX-like OS")  
  
     SET(DMOS_NAME "lin") 
     
-    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -fpermissive --wrap=__cxa_throw" )    
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -fpermissive" )    
+    SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --wrap=__cxa_throw" )    
 ENDIF ()
 
 ADD_DEFINITIONS(-DUSE_DMBACKTRACE)
