@@ -40,7 +40,7 @@ public:
 
 std::string prettyBackTrace(int skipframes = 0);
 #else
-
+#include <string>
 std::string prettyBackTrace(int skipframes = 0);
 #endif
 

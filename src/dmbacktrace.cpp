@@ -1,7 +1,7 @@
+#include "dmbacktrace.h"
 
 #ifdef WIN32
 
-#include "dmbacktrace.h"
 std::string prettyBackTrace(int skipframes)
 {
     std::stringstream str;

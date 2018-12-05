@@ -1,5 +1,7 @@
-#ifndef STACKTRACE_H_INCLUDED_
-#define STACKTRACE_H_INCLUDED_
+#ifndef __STACKTRACE_H_INCLUDE__
+#define __STACKTRACE_H_INCLUDE__
+
+#ifndef WIN32
 
 #include <stdio.h>
 
@@ -16,8 +18,12 @@ void stacktrace_free(struct stacktrace *st);
 void stacktrace_print(struct stacktrace *st);
 void stacktrace_fprint(struct stacktrace *st, FILE *);
 
+
 #ifdef __cplusplus
+void stacktrace_string(struct stacktrace *st, std::string* str);
 struct stacktrace *stacktrace_get_exc();
+
+
 #endif
 
 #ifdef __cplusplus
@@ -25,3 +31,4 @@ struct stacktrace *stacktrace_get_exc();
 #endif
 
 #endif
+#endif // __STACKTRACE_H_INCLUDE__
