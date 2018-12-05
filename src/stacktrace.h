@@ -17,7 +17,20 @@ void stacktrace_print(struct stacktrace *st);
 void stacktrace_fprint(struct stacktrace *st, FILE *);
 void stacktrace_string(struct stacktrace *st, std::string* trace);
 
-struct stacktrace *stacktrace_get_exc();
+void _stacktrace_set_exc();
+struct stacktrace *_stacktrace_get_exc();
+
+struct stacktrace *stacktrace_get_exc() {
+    return _stacktrace_get_exc();
+}
+
+extern "C" void __cxa_throw(void *thrown_exception, std::type_info *tinfo, void(*dest)(void *))
+__attribute__((noreturn));
+
+extern "C" void __wrap___cxa_throw(void *thrown_exception, std::type_info *tinfo, void(*dest)(void *)) {
+    _stacktrace_set_exc();
+    __cxa_throw(thrown_exception, tinfo, dest);
+}
 
 #endif
 
