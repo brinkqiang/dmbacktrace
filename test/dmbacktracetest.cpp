@@ -1,8 +1,19 @@
 
 #include "dmbacktrace.h"
 
-int main( int argc, char* argv[] ) {
+void test2()
+{
+    std::string strTrace = prettyBackTrace(0);
+    std::cout << strTrace << std::endl;
+}
 
-    std::string strTrace = prettyBackTrace(3);
+void test()
+{
+    test2();
+}
+
+
+int main( int argc, char* argv[] ) {
+    test();
     return 0;
 }
