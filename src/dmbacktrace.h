@@ -41,6 +41,8 @@ public:
 std::string prettyBackTrace(int skipframes = 0);
 #else
 #include <string>
+#include <sstream>
+#include <iostream>
 std::string prettyBackTrace(int skipframes = 0);
 #endif
 
