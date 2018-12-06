@@ -33,7 +33,7 @@ ELSEIF (UNIX)
  
     SET(DMOS_NAME "lin") 
     
-    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -rdynamic -fpermissive" )    
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -fpermissive" )    
     SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic" )   
 ENDIF ()
 
