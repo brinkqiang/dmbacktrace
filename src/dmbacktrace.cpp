@@ -91,7 +91,8 @@ void StackWalkerStringHelper::OnDbgHelpErr(LPCSTR szFuncName, DWORD gle, DWORD64
 #include <string>
 
 #include "dmformat.h"
-#define BACKTRACE_SIZE   16
+
+#define BACKTRACE_SIZE 20
 
 std::string prettyBackTrace(int skipframes)
 {
