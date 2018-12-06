@@ -90,13 +90,13 @@ std::string prettyBackTrace(int skipframes)
 {
     std::string strTrace;
 
-    void *array[20] = {0};
+    void *array[30] = {0};
     size_t size = 0;
     char **strings = NULL;
 
-    size = backtrace(array, 20);
+    size = backtrace(array, 30);
     strings = backtrace_symbols(array, size);
-    printf("backtrace() return %x addresses\r\n", strings);
+    printf("backtrace() return %x|%d addresses\r\n", strings, size);
 
     if (NULL == strings)
     {
