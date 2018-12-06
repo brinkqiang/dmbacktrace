@@ -104,7 +104,7 @@ std::string prettyBackTrace(int skipframes)
     for (int i = 0; i < size; i++)
     {
         std::string strLine;
-        fmt::format(strLine, "%s\n", strings[i]);
+        fmt::format(strLine, "{0}\n", strings[i]);
         strTrace.append(strLine);
     }
 
