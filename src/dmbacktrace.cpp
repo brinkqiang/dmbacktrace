@@ -120,7 +120,7 @@ std::string prettyBackTrace(int skipframes)
     for (j = 0; j < nptrs; j++)
     {
         std::string strLine;
-        fmt::format(strLine, "[%02d] %s\n", j, strings[j]);
+        fmt::format(strLine, "{0:02} {}\n", j, strings[j]);
         strTrace.append(strLine);
         printf("[%02d] %s\n", j, strings[j]);
     }
