@@ -99,8 +99,10 @@ void StackWalkerStringHelper::OnDbgHelpErr(LPCSTR szFuncName, DWORD gle, DWORD64
 
 #define BACKTRACE_SIZE   16
 
-void dump(void)
+std::string prettyBackTrace(int skipframes)
 {
+    std::string strTrace;
+
     int j, nptrs;
     void *buffer[BACKTRACE_SIZE];
     char **strings;
@@ -116,40 +118,14 @@ void dump(void)
     }
 
     for (j = 0; j < nptrs; j++)
-        printf("  [%02d] %s\n", j, strings[j]);
-
-    free(strings);
-}
-
-std::string prettyBackTrace(int skipframes)
-{
-    std::string strTrace;
-
-    void *array[30] = {0};
-    size_t size = 0;
-    char **strings = NULL;
-
-    size = backtrace(array, 30);
-    strings = backtrace_symbols(array, size);
-    printf("backtrace() return %x|%d addresses\r\n", strings, size);
-    dump();
-    if (NULL == strings)
-    {
-        return strTrace;
-    }
-
-    for (int i = 0; i < size; i++)
     {
         std::string strLine;
-        fmt::format(strLine, "{0}\n", strings[i]);
-
-        printf("%s\r\n", strLine.c_str());
-
+        fmt::format(strLine, "[%02d] %s\n", j, strings[j]);
         strTrace.append(strLine);
+        printf("[%02d] %s\n", j, strings[j]);
     }
 
     free(strings);
-    strings = NULL;
 
     return strTrace;
 }
