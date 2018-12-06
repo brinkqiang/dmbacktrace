@@ -84,12 +84,32 @@ void StackWalkerStringHelper::OnDbgHelpErr(LPCSTR szFuncName, DWORD gle, DWORD64
 #else
 #include <string>
 #include "stacktrace.h"
+#include "dmformat.h"
+
 std::string prettyBackTrace(int skipframes)
 {
     std::string strTrace;
-    struct stacktrace *trace = stacktrace_get(skipframes);
-    stacktrace_string(trace, &strTrace);
-    stacktrace_free(trace);
+
+    void *array[20] = {0};
+    size_t size = 0;
+    char **strings = NULL;
+
+    size = backtrace(array, 20);
+    strings = backtrace_symbols(array, size);
+    if (NULL == strings)
+    {
+        return strTrace;
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        std::string strLine;
+        fmt::format(strLine, "%s\n", strings[i]);
+        strTrace.append(strLine);
+    }
+
+    free(strings);
+    strings = NULL;
 
     return strTrace;
 }
