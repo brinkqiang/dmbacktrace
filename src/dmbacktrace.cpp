@@ -96,7 +96,7 @@ std::string prettyBackTrace(int skipframes)
 
     size = backtrace(array, 20);
     strings = backtrace_symbols(array, size);
-    printf("backtrace() returned %d addresses \r\n", strings);
+    printf("backtrace() return %x addresses\r\n", strings);
 
     if (NULL == strings)
     {
