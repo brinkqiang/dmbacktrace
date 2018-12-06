@@ -82,21 +82,15 @@ void StackWalkerStringHelper::OnDbgHelpErr(LPCSTR szFuncName, DWORD gle, DWORD64
         StackWalker::OnDbgHelpErr(szFuncName, gle, addr);
 }
 #else
-#include <execinfo.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <string>
-
-#include "dmformat.h"
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>	    /* for signal */
 #include <execinfo.h> 	/* for backtrace() */
 
+#include <string>
+
+#include "dmformat.h"
 #define BACKTRACE_SIZE   16
 
 std::string prettyBackTrace(int skipframes)
@@ -109,8 +103,6 @@ std::string prettyBackTrace(int skipframes)
 
     nptrs = backtrace(buffer, BACKTRACE_SIZE);
 
-    printf("backtrace() returned %d addresses\n", nptrs);
-
     strings = backtrace_symbols(buffer, nptrs);
     if (strings == NULL) {
         perror("backtrace_symbols");
@@ -121,7 +113,6 @@ std::string prettyBackTrace(int skipframes)
     {
         std::string strLine = fmt::format("[{0:02}] {1}\n", j, strings[j]);
         strTrace.append(strLine);
-        //printf("[%02d] %s\n", j, strings[j]);
     }
 
     free(strings);
