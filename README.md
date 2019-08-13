@@ -42,13 +42,13 @@ int main( int argc, char* argv[] ) {
 
 win
 ```
-e:\git\private_github\dmbacktrace\bin\Debug>dmbacktracetest.exe
-e:\git\private_github\dmbacktrace\src\dmbacktrace.cpp (58): StackWalkerStringHelper::getStackTrace
-e:\git\private_github\dmbacktrace\src\dmbacktrace.cpp (47): StackWalkerString::getStackTrace
-e:\git\private_github\dmbacktrace\src\dmbacktrace.cpp (7): DMGetBackTrace
-e:\git\private_github\dmbacktrace\test\dmbacktracetest.cpp (7): test2
-e:\git\private_github\dmbacktrace\test\dmbacktracetest.cpp (14): test
-e:\git\private_github\dmbacktrace\test\dmbacktracetest.cpp (19): main
+e:\git\dmbacktrace\bin\Debug>dmbacktracetest.exe
+e:\git\dmbacktrace\src\dmbacktrace.cpp (58): StackWalkerStringHelper::getStackTrace
+e:\git\dmbacktrace\src\dmbacktrace.cpp (47): StackWalkerString::getStackTrace
+e:\git\dmbacktrace\src\dmbacktrace.cpp (7): DMGetBackTrace
+e:\git\dmbacktrace\test\dmbacktracetest.cpp (7): test2
+e:\git\dmbacktrace\test\dmbacktracetest.cpp (14): test
+e:\git\dmbacktrace\test\dmbacktracetest.cpp (19): main
 d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl (79): invoke_main
 d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl (288): __scrt_common_main_seh
 d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl (331): __scrt_common_main
