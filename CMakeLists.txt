@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 
 PROJECT(dmbacktrace)
 
-PROJECT(dmconfigserver)
 INCLUDE(cmake/ModuleImport.cmake)
 INCLUDE(cmake/ModuleCompileOptions.cmake)
 ModuleSetCompileOptions()
