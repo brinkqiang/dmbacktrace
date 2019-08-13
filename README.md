@@ -24,7 +24,7 @@ dmbacktrace
 #include <string>
 void test2()
 {
-    std::string strTrace = prettyBackTrace(0);
+    std::string strTrace = DMGetBackTrace();
     std::cout << strTrace << std::endl;
 }
 
