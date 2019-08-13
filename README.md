@@ -57,7 +57,14 @@ d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp (17): main
 000000007759C541 (ntdll): (filename not available): RtlUserThreadStart
 ```
 
-
+linux(centos)
+```
+[00] ./dmbacktracetest(_Z14DMGetBackTracei+0x38) [0x411b68]
+[01] ./dmbacktracetest(_Z5test2v+0x12) [0x4119f2]
+[02] ./dmbacktracetest(main+0x9) [0x411879]
+[03] /lib64/libc.so.6(__libc_start_main+0xf5) [0x7fab965a6495]
+[04] ./dmbacktracetest() [0x411925]
+```
 ## Contacts
 [![Join the chat](https://badges.gitter.im/brinkqiang/dmbacktrace/Lobby.svg)](https://gitter.im/brinkqiang/dmbacktrace)
 
