@@ -2,7 +2,7 @@
 
 #ifdef WIN32
 
-std::string prettyBackTrace(int skipframes)
+std::string DMGetBackTrace(int skipframes)
 {
     return StackWalkerString::getStackTrace(skipframes + 1);
     //std::stringstream str;
@@ -95,7 +95,7 @@ void StackWalkerStringHelper::OnDbgHelpErr(LPCSTR szFuncName, DWORD gle, DWORD64
 
 #define BACKTRACE_SIZE 20
 
-std::string prettyBackTrace(int skipframes)
+std::string DMGetBackTrace(int skipframes)
 {
     std::string strTrace;
 

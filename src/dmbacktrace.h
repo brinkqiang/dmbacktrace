@@ -38,12 +38,12 @@ public:
 };
 
 
-std::string prettyBackTrace(int skipframes = 0);
+std::string DMGetBackTrace(int skipframes = 0);
 #else
 #include <string>
 #include <sstream>
 #include <iostream>
-std::string prettyBackTrace(int skipframes = 0);
+std::string DMGetBackTrace(int skipframes = 0);
 #endif
 
 #endif // __DMBACKTRACE_H_INCLUDE__
