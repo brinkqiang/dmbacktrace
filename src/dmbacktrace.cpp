@@ -5,36 +5,6 @@
 std::string DMGetBackTrace(int skipframes)
 {
     return StackWalkerString::getStackTrace(skipframes + 1);
-    //std::stringstream str;
-    //str << StackWalkerString::getStackTrace(skipframes + 1);
-
-    // Get the backtrace of all other threads in this process as well
-
-    //DWORD currentProcessId = GetCurrentProcessId();
-    //DWORD currentThreadId = GetCurrentThreadId();
-    //HANDLE h = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
-    //if (h != INVALID_HANDLE_VALUE) {
-    //    THREADENTRY32 te;
-    //    te.dwSize = sizeof(te);
-    //    if (Thread32First(h, &te)) {
-    //        do {
-    //            if (te.dwSize >= FIELD_OFFSET(THREADENTRY32, th32OwnerProcessID) +
-    //                sizeof(te.th32OwnerProcessID)) {
-    //                if (currentProcessId == te.th32OwnerProcessID && currentThreadId != te.th32ThreadID)
-    //                {
-    //                    HANDLE hThread = OpenThread(THREAD_ALL_ACCESS, TRUE, te.th32ThreadID);
-    //                    str << "Thread " << te.th32ThreadID << " is at: " << std::endl << StackWalkerString::getStackTrace(0, hThread);
-    //                    CloseHandle(hThread);
-    //                    fflush(stdout);
-    //                }
-    //            }
-    //            te.dwSize = sizeof(te);
-    //        } while (Thread32Next(h, &te));
-    //    }
-    //    CloseHandle(h);
-    //}
-
-    //return str.str();
 }
 
 std::string StackWalkerString::getStackTrace(int skipframes, HANDLE hThread /*= GetCurrentThread()*/)
