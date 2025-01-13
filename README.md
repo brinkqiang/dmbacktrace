@@ -66,6 +66,6 @@ linux(centos)
 [04] ./dmbacktracetest() [0x411925]
 ```
 ## Contacts
-[![Join the chat](https://badges.gitter.im/brinkqiang/dmbacktrace/Lobby.svg)](https://gitter.im/brinkqiang/dmbacktrace)
+
 
 ## Thanks
