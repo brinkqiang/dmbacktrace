@@ -22,6 +22,5 @@ if(PROJECT_IS_TOP_LEVEL)
             target_link_options(dmbacktracetest PRIVATE "-rdynamic")
             target_link_options(dmbacktrace_easytest PRIVATE "-rdynamic")
         endif()
-    
     endif()
 endif()
