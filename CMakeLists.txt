@@ -14,4 +14,8 @@ LibImport("libdmbacktrace" "src/libdmbacktrace")
 
 if(PROJECT_IS_TOP_LEVEL)
     ExeImport("test" "libdmbacktrace")
+
+    if(NOT WIN32)
+        target_link_options(dmbacktracetest PRIVATE "-rdynamic")
+    endif()
 endif()
