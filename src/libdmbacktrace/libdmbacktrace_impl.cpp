@@ -113,7 +113,7 @@ void DmbacktraceImpl::Release(void) {
 std::string DmbacktraceImpl::GetBackTrace(int skipframes) {
 #ifdef _WIN32
     std::unique_lock<std::mutex> lock(g_mutex);
-    return g_swsi.getStackTrace(skipframes + 1, GetCurrentThread());
+    return g_swsi.getStackTrace(skipframes + 2, GetCurrentThread());
 #else
     const int BACKTRACE_SIZE = 100;
     std::string strTrace;

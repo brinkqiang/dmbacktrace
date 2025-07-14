@@ -6,7 +6,7 @@ void test2()
     dmbacktracePtr module(dmbacktraceGetModule());
     if (module) {
         std::cout << "--- Stack Trace from Main Thread ---" << std::endl;
-        std::cout << module->GetBackTrace(1);
+        std::cout << module->GetBackTrace(0);
         std::cout << "------------------------------------" << std::endl;
     }
 }
