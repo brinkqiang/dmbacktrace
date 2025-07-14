@@ -66,36 +66,38 @@ std::mutex g_mutex;
 #include <cxxabi.h>
 #include <memory>
 
-static std::string demangle_symbol(const char* symbol_line) {
-    const char* mangled_start = nullptr;
-    const char* offset_start = nullptr;
+static std::string demangle_symbol(const std::string& symbol_line) {
+    // 1. 查找左括号 '(' 和加号 '+' 的位置
+    // 格式通常是: executable_path(mangled_symbol+offset) [address]
+    size_t mangled_start_pos = symbol_line.find('(');
+    size_t offset_start_pos = symbol_line.rfind('+'); // 使用 rfind 从右向左找，更准确
 
-    for (const char* p = symbol_line; *p; ++p) {
-        if (*p == '(') {
-            mangled_start = p + 1;
-        } else if (*p == '+') {
-            offset_start = p;
-        }
-    }
-
-    if (!mangled_start || !offset_start) {
+    // 2. 如果找不到符合格式的括号和加号，则认为这不是一个可 demangle 的 C++ 符号，返回原始行
+    if (mangled_start_pos == std::string::npos || offset_start_pos == std::string::npos || mangled_start_pos >= offset_start_pos) {
         return symbol_line;
     }
 
-    std::string mangled_name(mangled_start, offset_start - mangled_start);
+    // 3. 提取出 mangled name
+    // 从左括号后一位开始，长度为二者位置之差
+    std::string mangled_name = symbol_line.substr(mangled_start_pos + 1, offset_start_pos - (mangled_start_pos + 1));
 
     int status = 0;
+    // 4. 使用智能指针来管理 __cxa_demangle 分配的内存，确保自动释放
     std::unique_ptr<char, decltype(&std::free)> demangled_name_ptr(
         abi::__cxa_demangle(mangled_name.c_str(), nullptr, nullptr, &status),
         &std::free
     );
 
+    // 5. 如果 demangle 成功，则拼接成新的可读字符串
     if (status == 0 && demangled_name_ptr) {
-        std::string prefix(symbol_line, mangled_start - symbol_line);
-        std::string suffix(offset_start);
+        // 截取原始字符串的前缀和后缀
+        std::string prefix = symbol_line.substr(0, mangled_start_pos + 1);
+        std::string suffix = symbol_line.substr(offset_start_pos);
+        // 组合成最终结果
         return prefix + demangled_name_ptr.get() + suffix;
     }
 
+    // demangle 失败或无需 demangle，返回原始行
     return symbol_line;
 }
 #endif
