@@ -1,7 +1,7 @@
 #include "libdmbacktrace_impl.h"
 #include <iostream>
 
-#ifdef WIN32
+#ifdef _WIN32
 #include "stackwalker.h"
 #include <mutex>
 
@@ -78,26 +78,30 @@ std::string DmbacktraceImpl::GetBackTrace(int skipframes) {
     // +1 是为了跳过 GetBackTrace 这层函数调用本身
     return g_swsi.getStackTrace(skipframes + 1, GetCurrentThread());
 #else
-    // Linux/macOS 平台实现
-    std::stringstream ss;
-    const int BACKTRACE_SIZE = 100;
+    std::string strTrace;
 
+    int j, nptrs;
     void* buffer[BACKTRACE_SIZE];
-    int nptrs = backtrace(buffer, BACKTRACE_SIZE);
-    char** strings = backtrace_symbols(buffer, nptrs);
+    char** strings;
 
+    nptrs = backtrace(buffer, BACKTRACE_SIZE);
+
+    strings = backtrace_symbols(buffer, nptrs);
     if (strings == NULL) {
         perror("backtrace_symbols");
-        return "Error: backtrace_symbols failed.";
+        exit(EXIT_FAILURE);
     }
 
-    // +1 是为了跳过 GetBackTrace 这层函数调用本身
-    for (int j = skipframes + 1; j < nptrs; j++) {
-        ss << strings[j] << "\n";
+    for (j = 0; j < nptrs; j++)
+    {
+        std::string strLine = fmt::format("[{0:02}] {1}\n", j, strings[j]);
+        strTrace.append(strLine);
     }
 
     free(strings);
-    return ss.str();
+
+    return strTrace;
+
 #endif
 }
 
