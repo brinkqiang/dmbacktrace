@@ -22,5 +22,7 @@ if(PROJECT_IS_TOP_LEVEL)
     # 3. 如果检查通过，则为目标添加该选项
     if(CMAKE_LINKER_SUPPORTS_RDYNAMIC)
         target_link_options(dmbacktracetest PRIVATE "-rdynamic")
+        target_link_options(dmbacktrace_easytest PRIVATE "-rdynamic")
+
     endif()
 endif()
