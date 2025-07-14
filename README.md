@@ -46,28 +46,22 @@ int main( int argc, char* argv[] ) {
 
 win
 ```
-e:\git\dmbacktrace\bin\Debug>dmbacktracetest.exe
-e:\git\dmbacktrace\src\dmbacktrace.cpp (58): StackWalkerStringHelper::getStackTrace
-e:\git\dmbacktrace\src\dmbacktrace.cpp (47): StackWalkerString::getStackTrace
-e:\git\dmbacktrace\src\dmbacktrace.cpp (7): DMGetBackTrace
-e:\git\dmbacktrace\test\dmbacktracetest.cpp (7): test2
-e:\git\dmbacktrace\test\dmbacktracetest.cpp (14): test
-e:\git\dmbacktrace\test\dmbacktracetest.cpp (19): main
-d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl (79): invoke_main
-d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl (288): __scrt_common_main_seh
-d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl (331): __scrt_common_main
-d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp (17): mainCRTStartup
-00000000773659ED (kernel32): (filename not available): BaseThreadInitThunk
-000000007759C541 (ntdll): (filename not available): RtlUserThreadStart
+dmbacktrace\src\libdmbacktrace\libdmbacktrace_impl.cpp (116): DmbacktraceImpl::GetBackTrace
+dmbacktrace\test\dmbacktrace_easytest\dmbacktrace_easytest.cpp (9): test2
+dmbacktrace\test\dmbacktrace_easytest\dmbacktrace_easytest.cpp (22): main
+D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl (288): __scrt_common_main_seh
+00007FF80F277374 (KERNEL32): (filename not available): BaseThreadInitThunk
+00007FF81113CC91 (ntdll): (filename not available): RtlUserThreadStart
 ```
 
 linux(centos)
 ```
-[00] ./dmbacktracetest(_Z14DMGetBackTracei+0x38) [0x411b68]
-[01] ./dmbacktracetest(_Z5test2v+0x12) [0x4119f2]
-[02] ./dmbacktracetest(main+0x9) [0x411879]
-[03] /lib64/libc.so.6(__libc_start_main+0xf5) [0x7fab965a6495]
-[04] ./dmbacktracetest() [0x411925]
+--- Stack Trace from Main Thread ---
+[00] ./dmbacktrace_easytest(test2()+0x94) [0x5607579eb924]
+[01] ./dmbacktrace_easytest(main+0xd) [0x5607579eb72d]
+[02] /lib/x86_64-linux-gnu/libc.so.6(+0x29d90) [0x7f385a402d90]
+[03] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80) [0x7f385a402e40]
+[04] ./dmbacktrace_easytest(_start+0x25) [0x5607579eb7c5]
 ```
 ## Contacts
 
