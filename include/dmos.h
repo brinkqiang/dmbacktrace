@@ -172,4 +172,13 @@ typedef int DMHANDLE;
 
 #endif
 
+
+#if defined(_MSC_VER)
+#define DM_NO_INLINE __declspec(noinline)
+#elif defined(__GNUC__) || defined(__clang__)
+#define DM_NO_INLINE __attribute__((noinline))
+#else
+#define DM_NO_INLINE
+#endif
+
 #endif // __DMOS_H_INCLUDE__

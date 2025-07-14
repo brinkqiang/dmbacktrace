@@ -1,4 +1,4 @@
-#include "dmbacktrace.h"
+﻿#include "dmbacktrace.h"
 #include <iostream>
 
 // 函数 C
@@ -13,13 +13,13 @@ void function_c() {
 }
 
 // 函数 B
-[[noinline]] void function_b() {
+DM_NO_INLINE void function_b() {
     function_c();
 }
 
 // 函数 A
 
-[[noinline]] void function_a() {
+DM_NO_INLINE void function_a() {
     function_b();
 }
 
