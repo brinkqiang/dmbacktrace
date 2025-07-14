@@ -10,6 +10,8 @@ ADD_DEFINITIONS(-DUSE_DMBACKTRACE)
 
 ModuleImport("dmformat" "thirdparty/dmformat")
 
-LibImport("dmbacktrace" "src")
+LibImport("libdmbacktrace" "src/libdmbacktrace")
 
-ExeImport("test" "dmbacktrace")
+if(PROJECT_IS_TOP_LEVEL)
+    ExeImport("test" "libdmbacktrace")
+endif()
