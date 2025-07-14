@@ -13,12 +13,13 @@ void function_c() {
 }
 
 // 函数 B
-void function_b() {
+[[noinline]] void function_b() {
     function_c();
 }
 
 // 函数 A
-void function_a() {
+
+[[noinline]] void function_a() {
     function_b();
 }
 
