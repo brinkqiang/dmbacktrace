@@ -1,6 +1,6 @@
 #include "libdmbacktrace_impl.h"
 #include <iostream>
-
+#include "dmformat.h"
 #ifdef _WIN32
 #include "stackwalker.h"
 #include <mutex>
