@@ -63,6 +63,41 @@ std::mutex g_mutex;
 #include <stdlib.h>
 #include <unistd.h>
 #include <sstream>
+#include <cxxabi.h>
+#include <memory>
+
+static std::string demangle_symbol(const char* symbol_line) {
+    const char* mangled_start = nullptr;
+    const char* offset_start = nullptr;
+
+    for (const char* p = symbol_line; *p; ++p) {
+        if (*p == '(') {
+            mangled_start = p + 1;
+        } else if (*p == '+') {
+            offset_start = p;
+        }
+    }
+
+    if (!mangled_start || !offset_start) {
+        return symbol_line;
+    }
+
+    std::string mangled_name(mangled_start, offset_start - mangled_start);
+
+    int status = 0;
+    std::unique_ptr<char, decltype(&std::free)> demangled_name_ptr(
+        abi::__cxa_demangle(mangled_name.c_str(), nullptr, nullptr, &status),
+        &std::free
+    );
+
+    if (status == 0 && demangled_name_ptr) {
+        std::string prefix(symbol_line, mangled_start - symbol_line);
+        std::string suffix(offset_start);
+        return prefix + demangled_name_ptr.get() + suffix;
+    }
+
+    return symbol_line;
+}
 #endif
 
 // --- DmbacktraceImpl 方法实现 ---
@@ -71,40 +106,37 @@ void DmbacktraceImpl::Release(void) {
     delete this;
 }
 
+
+
 std::string DmbacktraceImpl::GetBackTrace(int skipframes) {
-#ifdef WIN32
-    // 使用锁确保来自不同线程的调用不会交错执行
+#ifdef _WIN32
     std::unique_lock<std::mutex> lock(g_mutex);
-    // +1 是为了跳过 GetBackTrace 这层函数调用本身
     return g_swsi.getStackTrace(skipframes + 1, GetCurrentThread());
 #else
-
-    const int BACKTRACE_SIZE = 20;
-
+    const int BACKTRACE_SIZE = 100;
     std::string strTrace;
 
-    int j, nptrs;
     void* buffer[BACKTRACE_SIZE];
-    char** strings;
+    int nptrs = backtrace(buffer, BACKTRACE_SIZE);
 
-    nptrs = backtrace(buffer, BACKTRACE_SIZE);
+    std::unique_ptr<char*, decltype(&std::free)> strings(
+        backtrace_symbols(buffer, nptrs),
+        &std::free
+    );
 
-    strings = backtrace_symbols(buffer, nptrs);
-    if (strings == NULL) {
+    if (strings == nullptr) {
         perror("backtrace_symbols");
-        exit(EXIT_FAILURE);
+        return "Error: backtrace_symbols failed.";
     }
-
-    for (j = 0; j < nptrs; j++)
+    for (int j = skipframes + 1; j < nptrs; j++)
     {
-        std::string strLine = fmt::format("[{0:02}] {1}\n", j, strings[j]);
+        std::string demangled_line = demangle_symbol(strings.get()[j]);
+        
+        std::string strLine = fmt::format("[{0:02}] {1}\n", j - (skipframes + 1), demangled_line);
         strTrace.append(strLine);
     }
 
-    free(strings);
-
     return strTrace;
-
 #endif
 }
 
