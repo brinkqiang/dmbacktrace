@@ -24,8 +24,12 @@ dmbacktrace
 #include <string>
 void test2()
 {
-    std::string strTrace = DMGetBackTrace();
-    std::cout << strTrace << std::endl;
+    dmbacktracePtr module(dmbacktraceGetModule());
+    if (module) {
+        std::cout << "--- Stack Trace from Main Thread ---" << std::endl;
+        std::cout << module->GetBackTrace(0);
+        std::cout << "------------------------------------" << std::endl;
+    }
 }
 
 void test()
