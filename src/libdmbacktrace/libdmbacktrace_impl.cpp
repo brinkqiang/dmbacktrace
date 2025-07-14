@@ -78,6 +78,9 @@ std::string DmbacktraceImpl::GetBackTrace(int skipframes) {
     // +1 是为了跳过 GetBackTrace 这层函数调用本身
     return g_swsi.getStackTrace(skipframes + 1, GetCurrentThread());
 #else
+
+    const int BACKTRACE_SIZE = 20;
+
     std::string strTrace;
 
     int j, nptrs;
